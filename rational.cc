@@ -5,20 +5,21 @@ using namespace std;
 
 /*implementacja Rational*/
 /* konstruktory / destruktory */
-Rational::Rational(): numerator(0), denominator(1), nan(false){
+Rational::Rational(): numerator(0), denominator(1){
 
 }
-Rational::Rational(Integer i): numerator(i), denominator(1), nan(false){
+Rational::Rational(Integer i): numerator(i), denominator(1){
 
 }
-Rational::Rational(Integer n, Unsigned d): numerator(n), denominator(d), nan(false){
+Rational::Rational(Integer n, Unsigned d): numerator(n), denominator(d){
 
 }
-Rational::Rational(const Rational& r): nan(false){
-
+Rational::Rational(const Rational& r){
+    numerator = r.n();
+    denominator = r.d();
 }
 Rational::~Rational(){
-
+    
 }
 
 Integer Rational::n(){
@@ -28,15 +29,17 @@ Unsigned Rational::d(){
     return denominator;
 }
 bool Rational::isNumber(){
-    return (!nan) && (denominator != 0);
+    return (denominator != 0);
 }
 
 /* tu źle ale później*/
-static Rational Rational::Zero(){
-    return Rational(0);
+Rational Rational::Zero(){
+    static Rational* zero = new Rational(0);
+    return *zero;
 }
-static Rational Rational::One(){
-    return Rational(1);
+Rational Rational::One(){
+    static Rational* one = new Rational(1);
+    return *one;
 }
 
 /*operatory */
@@ -62,13 +65,33 @@ Rational& Rational::operator+=(const Rational& r){
     numerator += r.n() * denominator;
     denominator *= r.d();
     /*można może lepiej dzięki NWW*/
-    nan &&= r.isNumber();
+    //jeżeli r była nan to w mianowniku bedzie 0 po operacju
+    //wiec tez bedzie nan
     
     //na końcu skracaj nowy ułamek
     this->frac();
     return *this;
 }
+Rational& Rational::operator+=(const Integer& i){
+    Rational r(i);
+    numerator *= r.d();
+    numerator += r.n() * denominator;
+    denominator *= r.d();
+
+    //na końcu skracaj nowy ułamek
+    this->frac();
+    return *this;
+}
 Rational& Rational::operator-=(const Rational& r){
+    numerator *= r.d();
+    numerator -= r.n() * denominator;
+    denominator *= r.d();
+
+    this->frac();
+    return *this;
+}
+Rational& Rational::operator-=(const Integer& i){
+    Rational r(i);
     numerator *= r.d();
     numerator -= r.n() * denominator;
     denominator *= r.d();
@@ -82,9 +105,24 @@ Rational& Rational::operator*=(const Rational& r){
     this->frac();
     return *this;
 }
+Rational& Rational::operator*=(const Integer&i){
+    numerator *=i;
+    this->frac();
+    return *this;
+}
 Rational& Rational::operator/=(const Rational& r){
-    numerator *= r.d();
-    denominator *= r.n();
+    if(r.isNumber()){
+        numerator *= r.d();
+        denominator *= r.n();
+    } else {
+        numerator = 0;
+        denominator = 0;
+    }
+    this->frac();
+    return *this;
+}
+Rational& Rational::operator/=(const Integer& i){
+    denominator *= i;
     this->frac();
     return *this;
 }
@@ -118,3 +156,9 @@ void Rational::frac(){
     denominator /= nwd;
 }
 /* koniec implementacji Rational */
+
+extern ostream& operator<<(ostream& os, const Rational& r) {
+    //narazie nie tak jak ma być, później się to zrobi
+  os << r.n() << "/" << r.d();
+  return os;
+}

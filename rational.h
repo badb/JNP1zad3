@@ -1,6 +1,9 @@
 #ifndef RATIONAL_H
 #define RATIONAL_H
 #include<boost/operators.hpp>
+#include<iostream>
+
+using namespace std;
 
 /*
  *zastanowić się czy nie zmienić na jakąś klasę opakowującą long
@@ -25,8 +28,8 @@ public:
     Unsigned d();   //returns denominator
     bool isNumber();    //czy jest poprawna
 
-    static Rational Zero();
-    static Rational One();
+    Rational Zero();
+    Rational One();
 
     /*operatory - reszta wytworzona przez boost*/
     /*ps to trzeba sprawdzić bo ja boosta nigdy nie uzywałem*/
@@ -47,12 +50,11 @@ public:
     Rational& operator=(const Integer& i);
     Rational& operator-(); //odwrotna do this
 
+
     
 private:
     Integer numerator;
     Unsigned denominator;
-
-    bool nan;
 
     static Unsigned NWD(Unsigned a, Unsigned b);
     static Unsigned ABS(Integer a){
@@ -67,4 +69,5 @@ private:
     void type_no_comparisions() const {}
 };
 
+extern ostream& operator<<(ostream& os, const Rational& r);
 #endif
