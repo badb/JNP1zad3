@@ -45,20 +45,18 @@ Rational Rational::One(){
 /*operatory */
 bool Rational::operator<(const Rational& r) const{
     //ułamki są skrócone!
-    bool ret;
-    ret = this->isNumber();
-    ret &&= r.isNumber();
-    ret &&= r.n() * this->d() < r.d() * this->n();
-    return ret;
+    return
+        this->isNumber();
+        && r.isNumber();
+        && r.n() * this->d() < r.d() * this->n();
 }
 bool Rational::operator==(const Rational& r) const{
     //ułamki są skrócone!
-    bool ret;
-    ret = this->isNumber();
-    ret &&= r.isNumber();
-    ret &&= r.n() == this->n();
-    ret &&= r.d() == this->d();
-    return ret;
+    return
+        this->isNumber()
+        && r.isNumber();
+        && r.n() == this->n();
+        && r.d() == this->d();
 }
 Rational& Rational::operator+=(const Rational& r){
     numerator *= r.d();
@@ -73,12 +71,8 @@ Rational& Rational::operator+=(const Rational& r){
     return *this;
 }
 Rational& Rational::operator+=(const Integer& i){
-    Rational r(i);
-    numerator *= r.d();
-    numerator += r.n() * denominator;
-    denominator *= r.d();
+    numerator += i * denominator;
 
-    //na końcu skracaj nowy ułamek
     this->frac();
     return *this;
 }
@@ -91,10 +85,7 @@ Rational& Rational::operator-=(const Rational& r){
     return *this;
 }
 Rational& Rational::operator-=(const Integer& i){
-    Rational r(i);
-    numerator *= r.d();
-    numerator -= r.n() * denominator;
-    denominator *= r.d();
+    numerator -= i * denominator;
 
     this->frac();
     return *this;
@@ -149,6 +140,7 @@ static Unsigned Rational::NWD(Unsigned a, Unsigned b){
         b = a % b;
         a = tmp;
     }
+    return a;
 }
 void Rational::frac(){
     Integer nwd = NWD(ABS(numerator), denominator);
@@ -159,6 +151,6 @@ void Rational::frac(){
 
 extern ostream& operator<<(ostream& os, const Rational& r) {
     //narazie nie tak jak ma być, później się to zrobi
-  os << r.n() << "/" << r.d();
-  return os;
+    os << r.n() << "/" << r.d();
+    return os;
 }
