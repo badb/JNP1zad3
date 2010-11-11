@@ -30,7 +30,9 @@ public:
 
     /*operatory - reszta wytworzona przez boost*/
     /*ps to trzeba sprawdzić bo ja boosta nigdy nie uzywałem*/
-    operator bool_type() const; // The Safe Bool Idiom
+    operator bool_type() const{ // The Safe Bool Idiom
+        return ( isNumber() && (numerator!=0) )? &Rational::type_no_comparisions : 0;
+    }
     bool operator<(const Rational& r) const;
     bool operator==(const Rational& r) const; //dzieki < reszta porównywań automatycznie
     Rational& operator+=(const Rational& r); // + automatycznie

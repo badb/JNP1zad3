@@ -1,20 +1,17 @@
 CC = g++
 DEBUGOROPTIMALIZE = -DNDEBUG -O2
-ALL = rational
 ifeq ($(debuglevel),1)
 	DEBUGOROPTIMALIZE = -g
 endif
 CFLAGS = -Wall -c $(DEBUGOROPTIMALIZE)
 
 
-all: $(ALL)
-	$(CC) $(CFLAGS) -o $<
+all: rational.cc rational.h
+	$(CC) $(CFLAGS) rational.cc -o rational.o
 
-
-%.o : %.cc %.h
-	$(CC) $(CFLAGS) $< -o $@
-
-$(ALL) : % : %.o
+test: tescik.cc
+	$(CC) $(CFLAGS) tescik.cc -o tescik.o
+	$(CC) tescik.o rational.o -o $@
 
 clean:
-	rm -f *.o $(ALL) *~ *.swp *.gch
+	rm -f *.o *~ *.swp *.gch

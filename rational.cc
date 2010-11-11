@@ -40,9 +40,6 @@ static Rational Rational::One(){
 }
 
 /*operatory */
-Rational::operator bool_type() const{
-    return ( isNumber() && (numerator!=0) )? &Rational::type_no_comparisions : 0;
-}
 bool Rational::operator<(const Rational& r) const{
     //ułamki są skrócone!
     bool ret;
