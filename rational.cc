@@ -8,10 +8,10 @@ using namespace std;
 Rational::Rational(): numerator(0), denominator(1), nan(false){
 
 }
-Rational::Rational(Long i): numerator(i), denominator(1), nan(false){
+Rational::Rational(Integer i): numerator(i), denominator(1), nan(false){
 
 }
-Rational::Rational(Long n, ULong d): numerator(n), denominator(d), nan(false){
+Rational::Rational(Integer n, Unsigned d): numerator(n), denominator(d), nan(false){
 
 }
 Rational::Rational(const Rational& r): nan(false){
@@ -21,10 +21,10 @@ Rational::~Rational(){
 
 }
 
-Long Rational::n(){
+Integer Rational::n(){
     return numerator;
 }
-ULong Rational::d(){
+Unsigned Rational::d(){
     return denominator;
 }
 bool Rational::isNumber(){
@@ -65,6 +65,7 @@ Rational& Rational::operator+=(const Rational& r){
     numerator += r.n() * denominator;
     denominator *= r.d();
     /*można może lepiej dzięki NWW*/
+    nan &&= r.isNumber();
     
     //na końcu skracaj nowy ułamek
     this->frac();
@@ -95,7 +96,7 @@ Rational& Rational::operator=(const Rational& r){
     denominator = r.d();
     return *this;
 }
-Rational& Rational::operator=(const int& i){
+Rational& Rational::operator=(const Integer& i){
     numerator = i;
     denominator = 1;
     return *this;
@@ -106,8 +107,8 @@ Rational& Rational::operator-(){
 }
 
 //przy wywołaniu ABS
-static ULong Rational::NWD(ULong a, ULong b){
-    ULong tmp = 0;
+static Unsigned Rational::NWD(Unsigned a, Unsigned b){
+    Unsigned tmp = 0;
     while(b){
         tmp = b;
         b = a % b;
@@ -115,7 +116,7 @@ static ULong Rational::NWD(ULong a, ULong b){
     }
 }
 void Rational::frac(){
-    Long nwd = NWD(ABS(numerator), denominator);
+    Integer nwd = NWD(ABS(numerator), denominator);
     numerator /= nwd;
     denominator /= nwd;
 }

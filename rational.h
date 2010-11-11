@@ -9,20 +9,20 @@
  * niechciana konwersja)
  * to chyba nie ma sensu tak robić)
  */
-typedef long Long;
-typedef unsigned long ULong;
+typedef long Integer;
+typedef unsigned long Unsigned;
 
 class Rational : boost::operators<Rational>{
 public:
     /* konstruktory / destruktory */
     Rational(); //tworzy ułamek 0
-    Rational(Long i); //tworzy na podstawie i
-    Rational(Long n, ULong d);
+    Rational(Integer i); //tworzy na podstawie i
+    Rational(Integer n, Unsigned d);
     Rational(const Rational& r);
     ~Rational();
 
-    Long n();   //returns numerator (skraca)
-    ULong d();   //returns denominator
+    Integer n();   //returns numerator (skraca)
+    Unsigned d();   //returns denominator
     bool isNumber();    //czy jest poprawna
 
     static Rational Zero();
@@ -34,22 +34,26 @@ public:
     bool operator<(const Rational& r) const;
     bool operator==(const Rational& r) const; //dzieki < reszta porównywań automatycznie
     Rational& operator+=(const Rational& r); // + automatycznie
+    Rational& operator+=(const Integer& i);
     Rational& operator-=(const Rational& r);// - automatycznie
+    Rational& operator-=(const Integer& i);
     Rational& operator*=(const Rational& r);// * automatycznie
+    Rational& operator*=(const Integer& i);
     Rational& operator/=(const Rational& r);// / automatycznie
+    Rational& operator/=(const Integer& i);
     Rational& operator=(const Rational& r);
-    Rational& operator=(const Long& i);
+    Rational& operator=(const Integer& i);
     Rational& operator-(); //odwrotna do this
 
     
 private:
-    Long numerator;
-    ULong denominator;
+    Integer numerator;
+    Unsigned denominator;
 
     bool nan;
 
-    static Long NWD(Long a, Long b);
-    static ULong ABS(Long a){
+    static Unsigned NWD(Unsigned a, Unsigned b);
+    static Unsigned ABS(Integer a){
         return (a>0)?a:-a;
     }
 
