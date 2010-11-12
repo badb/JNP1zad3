@@ -35,6 +35,9 @@ int main(int argc, char** argv) {
     r3 += r5; //r3==nan
     assert(!r3.isNumber());
     assert(r4==Rational(0);
+    assert(r1);
+    assert(!r5);
+    assert(!r4);
     
     cout << "r1" << r1 << endl;
     cout << "r2" <<  r2 << endl;
