@@ -3,15 +3,16 @@
 #include<cstdio>
 #include<assert.h>
 #include "rational.h"
+
 using namespace std;
 
 /*
  * 
  */
-int main(int argc, char** argv) {
+int main() {
     srand(time(0));
     const int MAX = 1000;
-    const Integer ZAKRES = 1000000L;
+    const Integer ZAKRES = 10000L;
 
     /* testy poprawność*/
     Rational r1; //ułamek zerowy
@@ -34,7 +35,7 @@ int main(int argc, char** argv) {
     assert(r1==Rational(13,12));
     r3 += r5; //r3==nan
     assert(!r3.isNumber());
-    assert(r4==Rational(0);
+    assert(r4==Rational(0));
     assert(r1);
     assert(!r5);
     assert(!r4);
@@ -50,9 +51,10 @@ int main(int argc, char** argv) {
     Rational rTab[MAX];
     //przypisz coś
     for(Integer i =0; i<MAX; i++){
+        cout << "Aktualizuje " << i << endl;
         rTab[i] += rand() % ZAKRES;
         rTab[i] /= rand() % ZAKRES;
-        (rand() %2 == 1) rTab[i] = -rTab[i]; // niektóre odwrotne
+        if (rand() %2 == 1)  rTab[i] = -rTab[i]; // niektóre odwrotne
     }
     
     //różne operacje
@@ -65,7 +67,7 @@ int main(int argc, char** argv) {
         rTab[rand() % MAX] *= rand() % ZAKRES;
         rTab[rand() % MAX] /= rTab[rand() % MAX];
         rTab[rand() % MAX] /= rand() % ZAKRES;
-
+/*
         rTab[rand() % MAX] = rTab[rand() % MAX] + rTab[rand() % MAX];
         rTab[rand() % MAX] = rTab[rand() % MAX] + (rand() % ZAKRES);
         rTab[rand() % MAX] = rTab[rand() % MAX] - rTab[rand() % MAX];
@@ -74,6 +76,7 @@ int main(int argc, char** argv) {
         rTab[rand() % MAX] = rTab[rand() % MAX] * (rand() % ZAKRES);
         rTab[rand() % MAX] = rTab[rand() % MAX] / rTab[rand() % MAX];
         rTab[rand() % MAX] = rTab[rand() % MAX] / (rand() % ZAKRES);
+ */
     }
 
     for(Integer i =0; i<MAX; i++){

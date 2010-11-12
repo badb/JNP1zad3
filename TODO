@@ -1,0 +1,4 @@
+1. static przy NWD (nie wiem czemu do cholery mi sie nie kompiluje jak tam wstawie static)
+2. the safe bool idiom
+3. boost dobrze zrobić bo na razie nie ma operatorów które miały się same stworzyć (+,-,*,/ - 2 argumentowe)
+4. wiele innych rzeczy

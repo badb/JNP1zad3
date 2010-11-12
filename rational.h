@@ -33,9 +33,9 @@ public:
 
     /*operatory - reszta wytworzona przez boost*/
     /*ps to trzeba sprawdzić bo ja boosta nigdy nie uzywałem*/
-    operator bool_type() const{ // The Safe Bool Idiom
-        return ( isNumber() && (numerator!=0) )? &Rational::type_no_comparisions : 0;
-    }
+    //operator bool_type() const{ // The Safe Bool Idiom
+    //    return ( isNumber() && (numerator!=0) )? &Rational::type_no_comparisions : 0;
+    //}
     bool operator<(const Rational& r) const;
     bool operator==(const Rational& r) const; //dzieki < reszta porównywań automatycznie
     Rational& operator+=(const Rational& r); // + automatycznie
@@ -56,7 +56,7 @@ private:
     Integer numerator;
     Unsigned denominator;
 
-    static Unsigned NWD(Unsigned a, Unsigned b);
+    Unsigned NWD(Unsigned a, Unsigned b);
     static Unsigned ABS(Integer a){
         return (a>0)?a:-a;
     }
@@ -64,8 +64,8 @@ private:
     void frac(); //skracanie
     
     //The Safe Bool Idiom
-    typedef void (Rational::*bool_type)() const;
-    void type_no_comparisions() const {}
+    //typedef void (Rational::*bool_type)() const;
+    //void type_no_comparisions() const {}
 };
 
 extern ostream& operator<<(ostream& os, const Rational& r);
