@@ -18,15 +18,15 @@ typedef unsigned long Unsigned;
 class Rational : boost::operators<Rational>{
 public:
     /* konstruktory / destruktory */
-    Rational(); //tworzy ułamek 0
-    Rational(Integer i); //tworzy na podstawie i
-    Rational(Integer n, Unsigned d);
+    Rational(): numerator(0), denominator(1) {} //tworzy ułamek 0
+    explicit Rational(Integer i): numerator(i), denominator(1) {} //tworzy na podstawie i
+    Rational(Integer n, Unsigned d): numerator(n), denominator(d) {}
     Rational(const Rational& r);
     ~Rational();
 
-    Integer n();   //returns numerator (skraca)
-    Unsigned d();   //returns denominator
-    bool isNumber();    //czy jest poprawna
+    Integer n() const;   //returns numerator (skraca)
+    Unsigned d() const;   //returns denominator
+    bool isNumber() const;    //czy jest poprawna
 
     Rational Zero();
     Rational One();
@@ -63,7 +63,6 @@ private:
 
     void frac(); //skracanie
     
-
     //The Safe Bool Idiom
     typedef void (Rational::*bool_type)() const;
     void type_no_comparisions() const {}

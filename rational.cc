@@ -5,15 +5,6 @@ using namespace std;
 
 /*implementacja Rational*/
 /* konstruktory / destruktory */
-Rational::Rational(): numerator(0), denominator(1){
-
-}
-Rational::Rational(Integer i): numerator(i), denominator(1){
-
-}
-Rational::Rational(Integer n, Unsigned d): numerator(n), denominator(d){
-
-}
 Rational::Rational(const Rational& r){
     numerator = r.n();
     denominator = r.d();
@@ -22,13 +13,13 @@ Rational::~Rational(){
     
 }
 
-Integer Rational::n(){
+Integer Rational::n() const{
     return numerator;
 }
-Unsigned Rational::d(){
+Unsigned Rational::d() const{
     return denominator;
 }
-bool Rational::isNumber(){
+bool Rational::isNumber() const{
     return (denominator != 0);
 }
 
@@ -46,16 +37,16 @@ Rational Rational::One(){
 bool Rational::operator<(const Rational& r) const{
     //ułamki są skrócone!
     return
-        this->isNumber();
-        && r.isNumber();
+        this->isNumber()
+        && r.isNumber()
         && r.n() * this->d() < r.d() * this->n();
 }
 bool Rational::operator==(const Rational& r) const{
     //ułamki są skrócone!
     return
         this->isNumber()
-        && r.isNumber();
-        && r.n() == this->n();
+        && r.isNumber()
+        && r.n() == this->n()
         && r.d() == this->d();
 }
 Rational& Rational::operator+=(const Rational& r){
