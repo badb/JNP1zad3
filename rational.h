@@ -20,7 +20,7 @@ public:
     /* konstruktory / destruktory */
     Rational(): numerator(0), denominator(1) {} //tworzy ułamek 0
     explicit Rational(Integer i): numerator(i), denominator(1) {} //tworzy na podstawie i
-    Rational(Integer n, Unsigned d): numerator(n), denominator(d) {}
+    Rational(Integer n, Unsigned d): numerator(n), denominator(d) { frac(); } //frac -> niepozwalaj żeby ułamek był trzymany nieskrócony
     Rational(const Rational& r);
     ~Rational();
 

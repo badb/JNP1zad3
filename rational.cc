@@ -52,7 +52,7 @@ bool Rational::operator==(const Rational& r) const{
 Rational& Rational::operator+=(const Rational& r){
     numerator *= r.d();
     numerator += r.n() * denominator;
-    denominator *= r.d();
+    denominator *= r.d(); //jeżeli denominator = 0
     /*można może lepiej dzięki NWW*/
     //jeżeli r była nan to w mianowniku bedzie 0 po operacju
     //wiec tez bedzie nan
@@ -134,14 +134,28 @@ Unsigned Rational::NWD(Unsigned a, Unsigned b){
     return a;
 }
 void Rational::frac(){
-    Integer nwd = NWD(ABS(numerator), denominator);
-    numerator /= nwd;
-    denominator /= nwd;
+    //sprawdzaj czy number
+    if ((numerator != 0) && (denominator > 0)){
+        Integer nwd = NWD(ABS(numerator), denominator);
+        numerator /= nwd;
+        denominator /= nwd;
+    }
 }
 /* koniec implementacji Rational */
 
 extern ostream& operator<<(ostream& os, const Rational& r) {
-    //narazie nie tak jak ma być, później się to zrobi
-    os << r.n() << "/" << r.d();
+    if (r.isNumber()){
+        Integer i = r.n() / Integer(r.d()); // n nie ma w mianowniku 0
+        Integer m = r.n() % Integer(r.d());
+        if(i!=0) os << i;
+        if((i!=0) && (m!=0)) {
+            if(m>0) os << "+";
+        } else if ((i==0) && (m==0)){
+            os << i;
+        }
+        if(m!=0) os << m << "/" << r.d();
+    } else {
+        os << "NaN";
+    }
     return os;
 }

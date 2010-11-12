@@ -9,7 +9,7 @@ CFLAGS = -Wall -c $(DEBUGOROPTIMALIZE)
 all: rational.cc rational.h
 	$(CC) $(CFLAGS) rational.cc -o rational.o
 
-test: tescik.cc
+test: tescik.cc rational.o
 	$(CC) $(CFLAGS) tescik.cc -o tescik.o
 	$(CC) tescik.o rational.o -o $@
 
