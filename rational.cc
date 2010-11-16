@@ -39,7 +39,8 @@ bool Rational::operator<(const Rational& r) const{
     return
         this->isNumber()
         && r.isNumber()
-        && r.n() * this->d() < r.d() * this->n();
+		&& r.d() * this->n() < r.n() * this->d();
+//         && r.n() * this->d() < r.d() * this->n();
 }
 bool Rational::operator==(const Rational& r) const{
     //ułamki są skrócone!
@@ -121,6 +122,14 @@ Rational& Rational::operator=(const Integer& i){
 Rational& Rational::operator-(){
     numerator = -numerator;
     return *this;
+}
+
+Rational operator-(const Integer& i, const Rational& r) {
+	return Rational(i * r.d() - r.n(), r.d());
+}
+
+Rational operator/(const Integer& i, const Rational& r) {
+	return Rational(i * r.d(), r.n());
 }
 
 //przy wywołaniu ABS

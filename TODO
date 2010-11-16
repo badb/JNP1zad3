@@ -2,3 +2,6 @@
 2. the safe bool idiom	[nie rozumiem tego do konca, ale to co napisales wyglada sensownie]
 3. operatory - operacje z intami niedziałają :( [juz dzialaja]
 4. wiele innych rzeczy 
+
+1. operatory porownan dla niepoprawengo 
+4. Integer - Rational, Integer / Rational (czy nie trzeba referencji)

@@ -49,7 +49,7 @@ public:
     /*operatory - reszta wytworzona przez boost*/
     /*ps to trzeba sprawdzić bo ja boosta nigdy nie uzywałem*/
     operator bool_type() const{ // The Safe Bool Idiom
-       return ( isNumber() && (numerator!=0) )? &Rational::type_no_comparisions : 0;
+       return (isNumber())? &Rational::type_no_comparisions : 0;
     }
     bool operator<(const Rational& r) const;
     bool operator==(const Rational& r) const; //dzieki < reszta porównywań automatycznie
@@ -71,4 +71,7 @@ public:
 };
 
 extern ostream& operator<<(ostream& os, const Rational& r);
+
+Rational operator-(const Integer& i, const Rational& r);
+Rational operator/(const Integer& i, const Rational& r);
 #endif
