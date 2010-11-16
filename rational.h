@@ -15,12 +15,27 @@ using namespace std;
 typedef long Integer;
 typedef unsigned long Unsigned;
 
-class Rational : boost::operators<Rational>{
+class Rational : boost::operators<Rational> {
+private:
+    Integer numerator;
+    Unsigned denominator;
+
+    const static Unsigned NWD(Unsigned a, Unsigned b);
+    const static Unsigned ABS(const Integer &a){
+        return (a>0)?a:-a;
+    }
+
+    void frac(); //skracanie
+
+    //The Safe Bool Idiom
+    typedef void (Rational::*bool_type)() const;
+    void type_no_comparisions() const {}
+
 public:
     /* konstruktory / destruktory */
     Rational(): numerator(0), denominator(1) {} //tworzy ułamek 0
     explicit Rational(Integer i): numerator(i), denominator(1) {} //tworzy na podstawie i
-    Rational(Integer n, Unsigned d): numerator(n), denominator(d) { frac(); } //frac -> niepozwalaj żeby ułamek był trzymany nieskrócony
+    Rational(Integer n, Integer d): numerator(d > 0 ? n : -n), denominator(abs(d)) { frac(); } //frac -> niepozwalaj żeby ułamek był trzymany nieskrócony
     Rational(const Rational& r);
     ~Rational();
 
@@ -28,14 +43,14 @@ public:
     Unsigned d() const;   //returns denominator
     bool isNumber() const;    //czy jest poprawna
 
-    Rational Zero();
-    Rational One();
+    static Rational Zero();
+    static Rational One();
 
     /*operatory - reszta wytworzona przez boost*/
     /*ps to trzeba sprawdzić bo ja boosta nigdy nie uzywałem*/
-    //operator bool_type() const{ // The Safe Bool Idiom
-    //    return ( isNumber() && (numerator!=0) )? &Rational::type_no_comparisions : 0;
-    //}
+    operator bool_type() const{ // The Safe Bool Idiom
+       return ( isNumber() && (numerator!=0) )? &Rational::type_no_comparisions : 0;
+    }
     bool operator<(const Rational& r) const;
     bool operator==(const Rational& r) const; //dzieki < reszta porównywań automatycznie
     Rational& operator+=(const Rational& r); // + automatycznie
@@ -52,20 +67,7 @@ public:
 
 
     
-private:
-    Integer numerator;
-    Unsigned denominator;
 
-    Unsigned NWD(Unsigned a, Unsigned b);
-    static Unsigned ABS(Integer a){
-        return (a>0)?a:-a;
-    }
-
-    void frac(); //skracanie
-    
-    //The Safe Bool Idiom
-    //typedef void (Rational::*bool_type)() const;
-    //void type_no_comparisions() const {}
 };
 
 extern ostream& operator<<(ostream& os, const Rational& r);

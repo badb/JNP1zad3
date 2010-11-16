@@ -124,7 +124,7 @@ Rational& Rational::operator-(){
 }
 
 //przy wywołaniu ABS
-Unsigned Rational::NWD(Unsigned a, Unsigned b){
+const Unsigned Rational::NWD(Unsigned a, Unsigned b){
     Unsigned tmp = 0;
     while(b){
         tmp = b;
