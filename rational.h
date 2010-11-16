@@ -15,7 +15,7 @@ using namespace std;
 typedef long Integer;
 typedef unsigned long Unsigned;
 
-class Rational : boost::operators<Rational> {
+class Rational : boost::operators<Rational>, boost::operators<Rational, Integer> {
 private:
     Integer numerator;
     Unsigned denominator;

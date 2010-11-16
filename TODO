@@ -1,4 +1,4 @@
-1. static przy NWD (nie wiem czemu do cholery mi sie nie kompiluje jak tam wstawie static)
-2. the safe bool idiom
-3. operatory - operacje z intami niedziałają :(
-4. wiele innych rzeczy
+1. static przy NWD (nie wiem czemu do cholery mi sie nie kompiluje jak tam wstawie static) [raczej dziala]
+2. the safe bool idiom	[nie rozumiem tego do konca, ale to co napisales wyglada sensownie]
+3. operatory - operacje z intami niedziałają :( [juz dzialaja]
+4. wiele innych rzeczy 

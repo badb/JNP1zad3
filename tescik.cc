@@ -85,13 +85,13 @@ int main() {
         rTab[rand() % MAX] /= rand() % ZAKRES;
 
         rTab[rand() % MAX] = rTab[rand() % MAX] + rTab[rand() % MAX];
-        //rTab[rand() % MAX] = rTab[rand() % MAX] + (rand() % ZAKRES);
+        rTab[rand() % MAX] = rTab[rand() % MAX] + (rand() % ZAKRES);
         rTab[rand() % MAX] = rTab[rand() % MAX] - rTab[rand() % MAX];
-        //rTab[rand() % MAX] = rTab[rand() % MAX] - (rand() % ZAKRES);
+        rTab[rand() % MAX] = rTab[rand() % MAX] - (rand() % ZAKRES);
         rTab[rand() % MAX] = rTab[rand() % MAX] * rTab[rand() % MAX];
-        //rTab[rand() % MAX] = rTab[rand() % MAX] * (rand() % ZAKRES);
+        rTab[rand() % MAX] = rTab[rand() % MAX] * (rand() % ZAKRES);
         rTab[rand() % MAX] = rTab[rand() % MAX] / rTab[rand() % MAX];
-        //rTab[rand() % MAX] = rTab[rand() % MAX] / (rand() % ZAKRES);
+        rTab[rand() % MAX] = rTab[rand() % MAX] / (rand() % ZAKRES);
 
     }
 
