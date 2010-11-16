@@ -24,11 +24,11 @@ bool Rational::isNumber() const{
 }
 
 /* tu źle ale później*/
-Rational Rational::Zero(){
+const Rational& Rational::Zero(){
     static Rational* zero = new Rational(0);
     return *zero;
 }
-Rational Rational::One(){
+const Rational& Rational::One(){
     static Rational* one = new Rational(1);
     return *one;
 }
@@ -39,8 +39,7 @@ bool Rational::operator<(const Rational& r) const{
     return
         this->isNumber()
         && r.isNumber()
-		&& r.d() * this->n() < r.n() * this->d();
-//         && r.n() * this->d() < r.d() * this->n();
+        && r.d() * this->n() < r.n() * this->d();
 }
 bool Rational::operator==(const Rational& r) const{
     //ułamki są skrócone!
@@ -50,6 +49,14 @@ bool Rational::operator==(const Rational& r) const{
         && r.n() == this->n()
         && r.d() == this->d();
 }
+
+bool Rational::operator!=(const Rational& r) const {
+	return
+		(this->isNumber()
+		&& r.isNumber())
+		&& !(r == *this);
+}
+
 Rational& Rational::operator+=(const Rational& r){
     numerator *= r.d();
     numerator += r.n() * denominator;

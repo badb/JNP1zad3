@@ -15,7 +15,10 @@ using namespace std;
 typedef long Integer;
 typedef unsigned long Unsigned;
 
-class Rational : boost::operators<Rational>, boost::operators<Rational, Integer> {
+class Rational : boost::arithmetic<Rational>,
+                 boost::partially_ordered <Rational>,
+                 boost::arithmetic<Rational, Integer>,
+                 boost::partially_ordered<Rational, Integer> {
 private:
     Integer numerator;
     Unsigned denominator;
@@ -43,8 +46,8 @@ public:
     Unsigned d() const;   //returns denominator
     bool isNumber() const;    //czy jest poprawna
 
-    static Rational Zero();
-    static Rational One();
+    static const Rational &Zero();
+    static const Rational &One();
 
     /*operatory - reszta wytworzona przez boost*/
     /*ps to trzeba sprawdzić bo ja boosta nigdy nie uzywałem*/
@@ -53,6 +56,7 @@ public:
     }
     bool operator<(const Rational& r) const;
     bool operator==(const Rational& r) const; //dzieki < reszta porównywań automatycznie
+    bool operator!=(const Rational& r) const;
     Rational& operator+=(const Rational& r); // + automatycznie
     Rational& operator+=(const Integer& i);
     Rational& operator-=(const Rational& r);// - automatycznie
